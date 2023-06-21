@@ -2,6 +2,14 @@
 
 class M_user extends CI_Model
 {
+    public function get_user_list($userid)
+    {
+        return $this->db->select('*')
+                        ->from('user')
+                        ->where('id !=', $userid)
+                        ->get()->result();
+    }
+
     public function insert_user($data)
     {
         return $this->db->insert('user', $data);

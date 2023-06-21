@@ -24,6 +24,8 @@
         </div>
     </div>
 
+    <input type="hidden" id="hdnSession" data-value="<?= $this->session->userdata('userid'); ?>" />
+
     <!-- Bootstrap core JavaScript-->
     <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
     <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -45,7 +47,34 @@
     <script type="text/javascript" src="<?= base_url('assets/'); ?>ckeditor/ckeditor.js"></script>
     <!-- panggil adapter jquery ckeditor -->
     <script type="text/javascript" src="<?= base_url('assets/'); ?>ckeditor/adapters/jquery.js"></script>
+    <!-- pusher -->
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <script type="text/javascript">
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('576dbb126855ca1d691b', {
+            cluster: 'ap1'
+        });
+
+        var channel_announcement = pusher.subscribe('channel-announcement');
+        channel_announcement.bind('event-annountcement', function(data) {
+            // alert(JSON.stringify(data));
+            var user = data.user;
+            var sessionValue = $("#hdnSession").data('value');
+
+            if (user == sessionValue) {
+                $.ajax({
+                    method: "POST",
+                    url: "<?= base_url('announcement/list'); ?>",
+                    data: {user: user},
+                    success: function(response) {
+                        $('#list-announcement').html(response);
+                    }
+                });
+            }
+        });
+
         $("#formUser").submit(function (e) 
         {
             e.preventDefault();

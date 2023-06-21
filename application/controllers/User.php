@@ -9,6 +9,7 @@ class User extends CI_Controller
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
         $this->load->model('M_user');
+        $this->load->model('M_announcement');
     }
 
     public function index()
@@ -16,10 +17,11 @@ class User extends CI_Controller
         if(!empty($this->session->userdata('userid')))
         {
             $header['title'] = 'Win Dev - Dashboard';
-    
+            $data = $this->_get_announcement($this->session->userdata('userid'));
+
             $this->load->view('templates/user-header.php', $header);
             $this->load->view('templates/user-sidebar.php', $header);
-            $this->load->view('templates/user-topbar.php');
+            $this->load->view('templates/user-topbar.php', $data);
             $this->load->view('dashboard');
             $this->load->view('templates/user-footer.php');
         }
@@ -27,6 +29,16 @@ class User extends CI_Controller
         {
             redirect('auth');
         }
+    }
+
+    private function _get_announcement($user)
+    {
+        $query_count_ann = $this->M_announcement->count_new_announcement($user);
+        $query_new_ann = $this->M_announcement->show_new_announcement($user);
+        $data['list_annount'] = $query_new_ann;
+        $data['amount_annount'] = $query_count_ann;
+
+        return $data;
     }
 
     public function users()

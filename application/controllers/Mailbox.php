@@ -44,20 +44,40 @@ class Mailbox extends CI_Controller
             $to = $this->input->post('to');
             $write = $this->input->post('write');
 
-            $send = $this->_emailProcess($subject, $to, $write);
+            // $send = $this->_emailProcess($subject, $to, $write);
 
-            if($send)
-            {
-                $json = array(
-                    'success' => 'Email has been send'
-                );
-            } else {
-                $json = array(
-                    'failed' => 'Failed to send email'
-                );
-            }
+            // if($send)
+            // {
+            //     $json = array(
+            //         'success' => 'Email has been send'
+            //     );
+            // } else {
+            //     $json = array(
+            //         'failed' => 'Failed to send email'
+            //     );
+            // }
+
+            require __DIR__ . '/vendor/autoload.php';
+
+            $options = array(
+                'cluster' => 'ap1',
+                'useTLS' => true
+            );
+            $pusher = new Pusher\Pusher(
+                '576dbb126855ca1d691b',
+                '3611930c7f7e74494e46',
+                '1620581',
+                $options
+            );
+
+            $data['message'] = 'hello world';
+            $pusher->trigger('my-channel', 'my-event', $data);
+
+            
         }
-
+        $json = array(
+            'success' => 'Email has been send'
+        );
 
         $this->output->set_content_type('application/json')->set_output(json_encode($json));
     }
