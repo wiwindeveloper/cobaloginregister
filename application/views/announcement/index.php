@@ -11,7 +11,10 @@
                     <div class="row">
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
-                        <?= $this->session->flashdata('alert'); ?>
+                            <?php
+                             echo $this->session->flashdata('alert'); 
+                            ?> 
+                            
                             <form class="user" method="post" action="<?= base_url('Announcement/send');?>">
                                 <div class="form-group row">
                                     <label for="input-title" class="col-sm-2 col-form-label">Title: </label>

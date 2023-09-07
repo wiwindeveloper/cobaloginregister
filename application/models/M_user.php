@@ -2,6 +2,13 @@
 
 class M_user extends CI_Model
 {
+    public function get_all_user()
+    {
+        return $this->db->select('*')
+                        ->from('user')
+                        ->get()->result();
+    }
+
     public function get_user_list($userid)
     {
         return $this->db->select('*')

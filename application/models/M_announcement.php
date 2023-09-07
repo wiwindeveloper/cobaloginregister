@@ -24,5 +24,19 @@ class M_announcement extends CI_Model
             ->limit(5, 0)
             ->get()->result();
     }
+
+    public function insert_batch($data)
+    {
+        return $this->db->insert_batch('announcement', $data);
+    }
+
+    public function get_announcement($userid)
+    {
+        return $this->db->select('*')
+            ->from('announcement')
+            ->where('user_id', $userid)
+            ->order_by('id', 'DESC')
+            ->get()->result();
+    }
 }
 ?>

@@ -63,6 +63,22 @@
                 </div>
             </li>
 
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item <?= $title == 'Announcement' ? 'active' : '';?>">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2"
+                    aria-expanded="true" aria-controls="collapseUtilities2">
+                    <i class="fas fa-fw fa-bell"></i>
+                    <span>Announcement</span>
+                </a>
+                <div id="collapseUtilities2" class="collapse <?= $title == 'Announcement' ? 'show' : '';?>" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item <?= $title == 'Announcement' ? 'active' : '';?>" href="<?= base_url('announcement');?>">Announcement</a>
+                        <a class="collapse-item <?= $title == 'List Announcement' ? 'active' : '';?>" href="<?= base_url('announcement/alllist');?>">List</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"

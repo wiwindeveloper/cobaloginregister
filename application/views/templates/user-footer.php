@@ -47,13 +47,22 @@
     <script type="text/javascript" src="<?= base_url('assets/'); ?>ckeditor/ckeditor.js"></script>
     <!-- panggil adapter jquery ckeditor -->
     <script type="text/javascript" src="<?= base_url('assets/'); ?>ckeditor/adapters/jquery.js"></script>
+
+    <script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    
     <!-- pusher -->
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <script type="text/javascript">
+        // datatable
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
-        var pusher = new Pusher('576dbb126855ca1d691b', {
+        var pusher = new Pusher('83737de8d744dc180234', {
             cluster: 'ap1'
         });
 
@@ -62,6 +71,7 @@
             // alert(JSON.stringify(data));
             var user = data.user;
             var sessionValue = $("#hdnSession").data('value');
+
 
             if (user == sessionValue) {
                 $.ajax({
