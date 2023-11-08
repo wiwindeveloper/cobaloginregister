@@ -20,21 +20,24 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>No</th>
                                             <th>Title</th>
                                             <th>Content</th>
                                             <th>Status</th>
                                             <th>Date</th>
                                         </tr>
                                     </thead>
+                                    <tbody></tbody>
                                     <tfoot>
                                         <tr>
+                                            <th>No</th>
                                             <th>Title</th>
                                             <th>Content</th>
                                             <th>Status</th>
                                             <th>Date</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody>
+                                    <!-- <tbody>
                                         <?php
                                             foreach($list_ann as $row)
                                             {
@@ -48,7 +51,7 @@
                                         <?php
                                             }
                                         ?>
-                                    </tbody>
+                                    </tbody> -->
                                 </table>
                             </div>
                         </div>

@@ -153,5 +153,38 @@ class Announcement extends CI_Controller
             redirect('auth');
         }
     }
+
+    public function get_data_announcement()
+    {
+            $list = $this->M_announcement->get_datatables($this->session->userdata('userid'));
+            $data = array();
+            $no = $_POST['start'];
+            foreach ($list as $field) {
+                    $no++;
+                    $row = array();
+                    $row[] = $no;
+                    $row[] = $field->title;
+                    $row[] = $field->content;
+                    if($field->status == 0)
+                    {
+                        $row[] = '<span class="badge badge-secondary">unread</span>';
+                    }else{
+                        $row[] = '<span class="badge badge-info">read</span>';
+                    }
+                    
+                    $row[] = $field->date;
+
+                    $data[] = $row;
+            }
+
+            $output = array(
+                    "draw" => $_POST['draw'],
+                    "recordsTotal" => $this->M_announcement->count_all(),
+                    "recordsFiltered" => $this->M_announcement->count_filtered($this->session->userdata('userid')),
+                    "data" => $data,
+            );
+            //output dalam format JSON
+            echo json_encode($output);
+    }
 }
 ?>

@@ -37,26 +37,54 @@
     <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="<?= base_url('assets/'); ?>vendor/chart.js/Chart.min.js"></script>
+    <!-- <script src="<?= base_url('assets/'); ?>vendor/chart.js/Chart.min.js"></script> -->
 
     <!-- Page level custom scripts -->
-    <script src="<?= base_url('assets/'); ?>js/demo/chart-area-demo.js"></script>
-    <script src="<?= base_url('assets/'); ?>js/demo/chart-pie-demo.js"></script>
+    <!-- <script src="<?= base_url('assets/'); ?>js/demo/chart-area-demo.js"></script>
+    <script src="<?= base_url('assets/'); ?>js/demo/chart-pie-demo.js"></script> -->
     <script src="<?= base_url('assets/'); ?>js/sweetalert2.all.min.js"></script>
     <!-- panggil ckeditor.js -->
     <script type="text/javascript" src="<?= base_url('assets/'); ?>ckeditor/ckeditor.js"></script>
     <!-- panggil adapter jquery ckeditor -->
     <script type="text/javascript" src="<?= base_url('assets/'); ?>ckeditor/adapters/jquery.js"></script>
 
-    <script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- <script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
+    <script src="<?= base_url('assets/'); ?>datatables/datatables.min.js"></script>
     
     <!-- pusher -->
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <script type="text/javascript">
         // datatable
+        // $(document).ready(function() {
+        //     $('#dataTable').DataTable();
+        // });
+
+        var table;
         $(document).ready(function() {
-            $('#dataTable').DataTable();
+
+        //datatables
+        table = $('#dataTable').DataTable({ 
+    
+                "processing": true, 
+                "serverSide": true, 
+                "order": [], 
+                
+                "ajax": {
+                    "url": "<?php echo base_url('Announcement/get_data_announcement')?>",
+                    "type": "POST"
+                },
+    
+                
+                "columnDefs": [
+                { 
+                    "targets": [ 0 ], 
+                    "orderable": false, 
+                },
+                ],
+    
+            });
+    
         });
 
         // Enable pusher logging - don't include this in production
